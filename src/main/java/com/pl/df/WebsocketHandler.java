@@ -38,7 +38,8 @@ public class WebsocketHandler {
                     .doFinally(signalType -> {
                         log.info(session.getId() + " : The inbound connection signal: " + signalType);
                         if (signalType.equals(SignalType.ON_COMPLETE)) {
-                            session.close().subscribe();
+                            // log.info(session.getId() + " : session CLOSED with signal : " + signalType);
+                            session.close().subscribe();    // when client request to close session then (here) on server side this session is closed as well.
                         }
                     })
                     .doOnNext(log::info);
